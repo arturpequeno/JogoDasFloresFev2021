@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jogo das Flores!</title>
+<button name=botao0 style="height: 100px; width:600px"><h1>TROQUE ATÉ AS FLORES FICAREM IGUAIS</h1></button>
+</head>
+<body style="height:800px; width:600px">
+<canvas width="600" height="350"></canvas>
+<button id=botao1 style="height:100px; width:200px"><h1>NOVA FLOR 1</h1></button><button id=botao2 style="height:100px; width:200px"><h1>NOVA FLOR 2</h1></button><button id=botao3 style="height:100px; width:200px"><h1>NOVA FLOR 3</h1></button>
+<button id=botao4 style="height:70px; width:600px"><h1>Deu certo? Clique AQUI!</h1></button>
+<script type="text/javascript">
+
+//Adaptando pra plano com centro x=200 e y=200 e nomeando as cores em português pra facilitar a leitura do código:
+	var circuloEixoX = 100
+	var circuloEixoY = 200
+	var verde = 'green'
+	var verdeclaro = 'lightgreen'
+	var verdeescuro = 'darkgreen'
+	var azul = 'blue'
+	var azulescuro = 'darkblue'
+	var amarelo = 'yellow'
+	var laranja = 'orange'
+	var preto = 'black'
+	var branco = 'white'
+	var azulclaro = 'lightblue'
+	var rosa = 'pink'
+	var cinza = 'grey'
+	var cinzaclaro = 'lightgrey'
+	var marrom = 'brown'
+	var vermelho = 'red'
+	var roxo = 'purple'
+	var button = document.querySelector("button");
+	var resultadosFlor1 = []
+	var resultadosFlor2 = []
+	var resultadosFlor3 = []
+
+//Funções:
+	function reloadPage(){
+    location.reload();}
+	function desenhaPlanoDeFundo(cor){
+		var tela = document.querySelector('canvas');
+		var pincel = tela.getContext('2d');
+		pincel.fillStyle = cor;
+		pincel.fillRect(0,0,600,400);}
+	function desenhaPlanoDaFrente(cor){
+		var tela = document.querySelector('canvas');
+		var pincel = tela.getContext('2d');
+		pincel.fillStyle = cor;
+		pincel.fillRect(0,300,600,400);}
+	function desenhaCirculoMedio(cor){
+		var tela = document.querySelector('canvas');
+		var pincel = tela.getContext('2d');
+		pincel.fillStyle = cor;
+		pincel.beginPath();
+		pincel.arc(circuloEixoX,circuloEixoY,40,0, 2*3.14);
+		pincel.fill();}
+	function desenhaCirculoPequeno(cor){
+		var tela = document.querySelector('canvas');
+		var pincel = tela.getContext('2d');
+		pincel.fillStyle = cor;
+		pincel.beginPath();
+		pincel.arc(circuloEixoX,circuloEixoY,25,0, 2*3.14);
+		pincel.fill();}
+	function desenhaCirculoMinusculo(cor){
+		var tela = document.querySelector('canvas');
+		var pincel = tela.getContext('2d');
+		pincel.fillStyle = cor;
+		pincel.beginPath();
+		pincel.arc(circuloEixoX,circuloEixoY,15,0, 2*3.14);
+		pincel.fill();}
+	function moveCirculoPraDireita(movimentoHorizontal){
+		circuloEixoX = 
+		circuloEixoX + movimentoHorizontal;}
+	function moveCirculoPraEsquerda(movimentoHorizontal){
+		circuloEixoX = 
+		circuloEixoX - movimentoHorizontal;}
+	function moveCirculoPraCima(movimentoVertical){
+		circuloEixoY = 
+		circuloEixoY - movimentoVertical;}
+	function moveCirculoPraBaixo(movimentoVertical){
+		circuloEixoY = 
+		circuloEixoY + movimentoVertical;}
+	function resetaCirculo1(){
+			circuloEixoX = 100;
+			circuloEixoY = 200;}
+	function resetaCirculo2(){
+			circuloEixoX = 300;
+			circuloEixoY = 200}
+	function resetaCirculo3(){
+			circuloEixoX = 500;
+			circuloEixoY = 200}
+//Cores da Flor:
+		var coresDasPetalas = [
+		azul, 
+		verdeclaro, 
+		cinzaclaro, 
+		vermelho, 
+		rosa, 
+		branco, 
+		amarelo];
+		var coresDaBorda = [
+		cinza,
+		azulescuro,
+		marrom,
+		verdeescuro,
+		preto,
+		laranja,
+		roxo	]
+
+//Desenhando as Flores: 
+	function desenhaFlor1(){
+
+		segredo1 = Math.round(Math.random()*6);
+		var corRandom1 = coresDasPetalas[segredo1];
+		var corRandom2 = coresDaBorda[segredo1];
+		var bordaDasPetalas = corRandom2;
+		var preenchePetalas = corRandom1;
+
+		resetaCirculo1();
+		moveCirculoPraDireita(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();
+
+		moveCirculoPraCima(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();	
+
+		moveCirculoPraEsquerda(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();	
+
+		moveCirculoPraBaixo(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1()
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo1();
+
+		desenhaCirculoPequeno(bordaDasPetalas);
+		desenhaCirculoMinusculo(amarelo);
+		resultadosFlor1.push(segredo1);
+		console.log (segredo1);
+		}
+
+	function desenhaFlor2(){
+
+		segredo2 = Math.round(Math.random()*6);
+		var corRandom1 = coresDasPetalas[segredo2];
+		var corRandom2 = coresDaBorda[segredo2];
+		var bordaDasPetalas = corRandom2;
+		var preenchePetalas = corRandom1;
+
+		resetaCirculo2();
+		moveCirculoPraDireita(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();
+
+		moveCirculoPraCima(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();	
+
+		moveCirculoPraEsquerda(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();	
+
+		moveCirculoPraBaixo(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2()
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo2();
+
+		desenhaCirculoPequeno(bordaDasPetalas);
+		desenhaCirculoMinusculo(amarelo);
+		resultadosFlor2.push(segredo2);
+		console.log(segredo2);
+		}
+
+	function desenhaFlor3(){
+
+		segredo3 = Math.round(Math.random()*6);
+		var corRandom1 = coresDasPetalas[segredo3];
+		var corRandom2 = coresDaBorda[segredo3];
+		var bordaDasPetalas = corRandom2;
+		var preenchePetalas = corRandom1;
+
+		resetaCirculo3();
+		moveCirculoPraDireita(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();
+
+		moveCirculoPraCima(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();	
+
+		moveCirculoPraEsquerda(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();	
+
+		moveCirculoPraBaixo(50);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3()
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraCima(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();
+
+		moveCirculoPraEsquerda(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();
+
+		moveCirculoPraDireita(30);
+		moveCirculoPraBaixo(30);
+		desenhaCirculoMedio(bordaDasPetalas);
+		desenhaCirculoPequeno(preenchePetalas);
+		resetaCirculo3();
+
+		desenhaCirculoPequeno(bordaDasPetalas);
+		desenhaCirculoMinusculo(amarelo);
+		resultadosFlor3.push(segredo3);
+		console.log (segredo3);
+		}
+
+
+//Desenhando o Plano de Fundo:
+	function novoPlanoDeFundo(){
+		desenhaPlanoDeFundo(azulclaro);
+		desenhaPlanoDaFrente(verde);
+	};
+	
+//Finalmente, a programação da página:
+	
+	novoPlanoDeFundo();
+	console.log();
+	var botao1 = document.getElementById('botao1');
+	botao1.onclick = desenhaFlor1;
+	var botao2 = document.getElementById('botao2');
+	botao2.onclick = desenhaFlor2;
+	var botao3 = document.getElementById('botao3');
+	botao3.onclick = desenhaFlor3;			
+	var botao4 = document.getElementById('botao4');
+
+	function link(){
+
+	}
+
+	function verifica(){
+			var x = resultadosFlor1.length
+			var y = resultadosFlor2.length
+			var z = resultadosFlor3.length
+			var a = resultadosFlor1[(x-1)]
+			var b = resultadosFlor2[(y-1)]
+			var c = resultadosFlor3[(z-1)]
+			if (a==b&&c) {window.location.href='https://www.youtube.com/watch?v=QtBDL8EiNZo'} else {alert("Tente outra vez!")}
+		};
+	botao4.onclick = verifica;
+
+//Código não utilizado:
+/*
+	pincel.fillStyle = "green";
+	pincel.fillRect(0,0,600,400);
+
+
+	pincel.fillStyle = 'yellow';
+	pincel.beginPath();
+	pincel.moveTo(0,200);
+	pincel.lineTo(300,400);
+	pincel.lineTo(600,200);
+	pincel.lineTo(300,0);
+	pincel.fill();
+
+
+
+	pincel.fillStyle = 'white';
+	pincel.beginPath();
+	pincel.moveTo(100,175);
+	pincel.lineTo(100,350);
+	pincel.lineTo(275,350);
+	pincel.fill();
+
+	pincel.fillRect(0,0,600,400);
+	pincel.fillStyle = "darkgreen";
+	pincel.fillRect(200,50,350,300);
+	pincel.fillStyle = "black";
+	pincel.fillRect(250,110,90,90);
+	pincel.fillRect(410,110,90,90);
+	pincel.fillRect(340,200,70,100);
+	pincel.fillRect(290,240,50,110);
+	pincel.fillRect(410,240,50,110);
+
+	pincel.beginPath();
+	pincel.arc(300,200,100,0, 2*3.14);
+	pincel.fill();
+*/
+
+
+</script>
+
+</body>
+
+</html>
